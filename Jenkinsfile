@@ -58,7 +58,7 @@ pipeline{
             steps{
                  
                  withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
-                 sh 'docker login -u rahultipledocker -p ${docker_hub}' 
+                 sh 'docker login -u nishantme -p ${docker_hub}' 
                 }
                  sh '''
                  docker tag app nishantme/app:latest
@@ -73,11 +73,11 @@ pipeline{
             steps{
                  
                  withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
-                 sh 'docker login -u rahultipledocker -p ${docker_hub}' 
+                 sh 'docker login -u nishantme -p ${docker_hub}' 
                 }
                  sh '''
-                 docker pull rahultipledocker/nov-aap:latest
-                 docker run -itd --name web-app rahultipledocker/nov-aap:latest /bin/bash
+                 docker pull nishantme/app:latest
+                 docker run -itd --name web-app nishantme/app:latest /bin/bash
                  docker logout
                  '''                 
             }
