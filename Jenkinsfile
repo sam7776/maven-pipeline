@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('Git checkout code') {
             steps {
-                git 'https://github.com/rahultiple31/spring-boot-war-example-jenkins.git'
+                git 'https://github.com/sam7776/maven-pipeline.git'
             }
         }
 
@@ -61,9 +61,9 @@ pipeline{
                  sh 'docker login -u rahultipledocker -p ${docker_hub}' 
                 }
                  sh '''
-                 docker tag app rahultipledocker/nov-aap:latest
-                 docker push rahultipledocker/nov-aap:latest
-                 docker rmi rahultipledocker/nov-aap:latest
+                 docker tag app nishantme/app:latest
+                 docker push nishantme/app:latest
+                 docker rmi nishantme/app:latest
                  docker logout
                  '''                 
             }
