@@ -1,11 +1,11 @@
 pipeline{
     agent any
     stages{
-        stage("git checkout"){
-            steps{
-                git 'https://github.com/sam7776/maven-pipeline.git'
-            }
-        }
+        // stage("git checkout"){
+        //     steps{
+        //         git 'https://github.com/sam7776/maven-pipeline.git'
+        //     }
+        // }
         stage("build"){
             steps{
                 sh '''
