@@ -20,5 +20,12 @@ pipeline{
                 '''
             }
         }
+        stage("Deploy"){
+            steps{
+                sh '''
+                    java -jar /var/lib/jenkins/workspace/mvn-project/target/hello-world-0.0.1-SNAPSHOT.war
+                '''
+            }
+        }
     }
 }
