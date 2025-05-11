@@ -20,12 +20,19 @@ pipeline{
                 '''
             }
         }
-        stage("Deploy"){
+        stage("docker build"){
             steps{
                 sh '''
-                    java -jar /var/lib/jenkins/workspace/mvn-project/target/hello-world-0.0.1-SNAPSHOT.war
+                    docker build -t spring-boot-app .
                 '''
             }
         }
+        // stage("Deploy"){
+        //     steps{
+        //         sh '''
+        //             java -jar /var/lib/jenkins/workspace/mvn-project/target/hello-world-0.0.1-SNAPSHOT.war
+        //         '''
+        //     }
+        // }
     }
 }
