@@ -40,7 +40,7 @@ pipeline{
             steps{
                 sh '''
                     docker rmi -f spring-boot-app
-                    docker build -t spring-boot-app .
+                    docker buipring-boot-app .
                 '''
             }
             post{
