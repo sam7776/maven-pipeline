@@ -37,7 +37,7 @@ pipeline{
             }
         }
         stage("docker build"){
-            steps{
+            st
                 sh '''
                     docker rmi -f spring-boot-app
                     docker build -t spring-boot-app .
@@ -48,7 +48,7 @@ pipeline{
                     echo "Docker image built successfully"
                 }
                 failure{
-                    ec "Docker image build failed"
+                    ecec "Docker image build failed"
                 }
             }
         }
@@ -83,7 +83,9 @@ pipeline{
             mail to: 'snnshnt@gmail.com',
                  subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})",
                  body: '''
-                 Check console output at ${env.BUILD_URL} to view the results.
+                 jenkins job failed Name :${env.JOB_NAME}
+                 jenkins job failed Build No : ${env.BUILD_NUMBER}
+                 jenkins job failed Chaeck : ${env.BUILD_URL}
                  '''
         }
     }
