@@ -59,7 +59,7 @@ pipeline{
         stage("docker run"){
             steps{
                 sh '''
-                    docker run -itd -p 8080:8080 spring-boot-app /bin/bash
+                    docker run -itd -p 8090:8090 spring-boot-app /bin/bash
                 '''
             }
             post{
