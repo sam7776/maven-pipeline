@@ -82,13 +82,14 @@ pipeline{
             mail to: 'snnshnt@gmail.com',
             subject: "Build Failed - ${JOB_NAME} #${BUILD_NUMBER}",
             body: """
-            Job: ${JOB_NAME}
-            Build Number: ${BUILD_NUMBER}
-            Build URL: ${BUILD_URL}
-            Workspace: ${WORKSPACE}
-            Jenkins URL: ${JENKINS_URL}
-            Build Cause: ${BUILD_CAUSE}
-            Build User: ${BUILD_USER_ID} (${BUILD_USER})
+            echo 'Job: ${JOB_NAME}'
+            echo 'Build Number: ${BUILD_NUMBER}'
+            echo 'Build URL: ${env.BUILD_URL}'
+            echo 'Workspace: ${WORKSPACE}'
+            echo 'Jenkins URL: ${JENKINS_URL}'
+            echo 'Build Cause: ${BUILD_CAUSE}'
+            echo 'Build User: ${BUILD_USER_ID} (${BUILD_USER})'
+    
             """
         }
     }  
