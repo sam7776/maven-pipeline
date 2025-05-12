@@ -1,8 +1,9 @@
 pipeline{
     agent any
     triggers{
-        cron('* * * * *')
+        pollSCM('* * * * *')        
     }
+    
     stages{
         // stage("git checkout"){
         //     steps{
