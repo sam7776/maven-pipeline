@@ -39,7 +39,7 @@ pipeline{
         stage("docker build"){
             steps{
                 sh '''
-                    docker rmi -f spring-boot-app
+                    dcker rmi -f spring-boot-app
                     docker build -t spring-boot-app .
                 '''
             }
@@ -82,7 +82,9 @@ pipeline{
         failure{
             mail to: 'snnshnt@gmail.com',
                  subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})",
-                 body: "Check console output at ${env.BUILD_URL} to view the results."
+                 body: '''
+                 Check console output at ${env.BUILD_URL} to view the results.
+                 '''
         }
     }
 
