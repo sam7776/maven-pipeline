@@ -52,24 +52,23 @@ pipeline{
                 }
             }
         }
-        stage("Deploy"){
-            steps{
-                sh '''
-                    java -jar /var/lib/jenkins/workspace/mvn-project/target/hello-world-0.0.1-SNAPSHOT.war
-                '''
-            }
-            post{
-                success{
-                    echo "Application deployed successfully"
-                }
-                failure{
-                    echo "Application deployment failed"
-                }
+        // stage("Deploy"){
+        //     steps{
+        //         sh '''
+        //             java -jar /var/lib/jenkins/workspace/mvn-project/target/hello-world-0.0.1-SNAPSHOT.war
+        //         '''
+        //     }
+        //     post{
+        //         success{
+        //             echo "Application deployed successfully"
+        //         }
+        //         failure{
+        //             echo "Application deployment failed"
+        //         }
 
-            }
+        //     }
 
-        }
-
+        // }
     }
     post{
         always{
