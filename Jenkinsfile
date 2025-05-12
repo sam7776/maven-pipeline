@@ -81,12 +81,16 @@ pipeline{
         }
         failure{
             mail to: 'snnshnt@gmail.com',
-                 subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})",
-                 body: '''
-                 jenkins job failed Name :${env.JOB_NAME}
-                 jenkins job failed Build No : ${env.BUILD_NUMBER}
-                 jenkins job failed Chaeck : ${env.BUILD_URL}
-                 '''
+            subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})",
+            body: """
+                Jenkins Job Failed!
+                ==================
+                Name: ${env.JOB_NAME}
+                Build No: ${env.BUILD_NUMBER}
+                Check: ${env.BUILD_URL}
+                Workspace: ${env.WORKSPACE}
+                Failed Stage: ${currentBuild.currentResult}
+            """
         }
     }
 
