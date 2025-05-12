@@ -40,7 +40,7 @@ pipeline{
             steps{
                 sh '''
                     docker rmi -f spring-boot-app
-                    docker buipring-boot-app .
+                    docker build -t spring-boot-app .
                 '''
             }
             post{
@@ -48,7 +48,7 @@ pipeline{
                     echo "Docker image built successfully"
                 }
                 failure{
-                    ecec "Docker image build failed"
+                    echo "Docker image build failed"
                 }
             }
         }
