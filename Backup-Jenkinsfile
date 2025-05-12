@@ -48,8 +48,8 @@ pipeline{
         stage("build docket images"){
             steps{
                  sh '''
-                 docker rmi -f app:latest
-                 docker bu-t app .
+                 dockatest
+                 dockapp .
                  '''
             }
         }
