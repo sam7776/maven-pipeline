@@ -36,8 +36,8 @@ pipeline{
                 }
             }
         }
-        stage("docker build"){
-            st
+        stage("docker b
+            steps{
                 sh '''
                     docker rmi -f spring-boot-app
                     docker build -t spring-boot-app .
