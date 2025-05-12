@@ -49,7 +49,7 @@ pipeline{
             steps{
                  sh '''
                  docker rmi -f app:latest
-                 docker build -t app .
+                 docker bu-t app .
                  '''
             }
         }
