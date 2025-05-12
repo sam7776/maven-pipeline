@@ -72,26 +72,19 @@ pipeline{
 
     }
     post{
+        always{
+            echo "Pipeline completed"
+        }
         success{
             mail to: 'snnshnt@gmail.com',
-            subject: "Build Successful- ${JOB_NAME} #${BUILD_NUMBER}",
-            body: """
-            body: "The build was successful. Check the console output at ${env.BUILD_URL}."
+                 subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})",
+                 body: "Check console output at ${env.BUILD_URL} to view the results."
         }
         failure{
             mail to: 'snnshnt@gmail.com',
-            subject: "Build Failed - ${JOB_NAME} #${BUILD_NUMBER}",
-            body: """
-            echo 'Job: ${JOB_NAME}'
-            echo 'Build Number: ${BUILD_NUMBER}'
-            echo 'Build URL: ${env.BUILD_URL}'
-            echo 'Workspace: ${WORKSPACE}'
-            echo 'Jenkins URL: ${JENKINS_URL}'
-            echo 'Build Cause: ${BUILD_CAUSE}'
-            echo 'Build User: ${BUILD_USER_ID} (${BUILD_USER})'
-    
-            """
+                 subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})",
+                 body: "Check console output at ${env.BUILD_URL} to view the results."
         }
-    }  
+    }
 
 }
