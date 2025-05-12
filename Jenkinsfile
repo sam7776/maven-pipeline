@@ -56,6 +56,22 @@ pipeline{
                 }
             }
         }
+        stage("docker run"){
+            steps{
+                sh '''
+                    docker run -itd -p 8080:8080 spring-boot-app /bin/bash
+                '''
+            }
+            post{
+                success{
+                    echo "Docker container running successfully"
+                }
+                failure{
+                    echo "Docker container failed to run"
+                }
+            }
+        }
+
         // stage("Deploy"){
         //     steps{
         //         sh '''
@@ -97,5 +113,4 @@ pipeline{
             """
         }
     }
-
 }
