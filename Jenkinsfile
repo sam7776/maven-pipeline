@@ -39,7 +39,7 @@ pipeline{
         stage("docker build"){
             steps{
                 sh '''
-                    dcker rmi -f spring-boot-app
+                    docker rmi -f spring-boot-app
                     docker build -t spring-boot-app .
                 '''
             }
@@ -48,7 +48,7 @@ pipeline{
                     echo "Docker image built successfully"
                 }
                 failure{
-                    echo "Docker image build failed"
+                    ec "Docker image build failed"
                 }
             }
         }
