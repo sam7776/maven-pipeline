@@ -86,7 +86,6 @@ pipeline{
             ${JOB_NAME} - ${BUILD_ID}, 
             ${JOB_URL} - ${BUILD_NUMBER},
             ${JOB_NAME} - ${BUILD_URL},
-            ${JOB_NAME} - ${BUILD_TIMESTAMP},
             ${JOB_NAME} - ${BUILD_DISPLAY_NAME},
             ${JOB_NAME} - ${BUILD_CAUSE},
             ${JOB_NAME} - ${BUILD_USER_ID},
