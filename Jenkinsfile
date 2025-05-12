@@ -12,12 +12,28 @@ pipeline{
                     mvn clean package
                 '''
             }
+            post{
+                success{
+                    echo "Build successful"
+                }
+                failure{
+                    echo "Build failed"
+                }
+            }
         }
         stage("test"){
             steps{
                 sh '''
                     mvn test
                 '''
+            }
+            post{
+                success{
+                    echo "Tests passed"
+                }
+                failure{
+                    echo "Tests failed"
+                }
             }
         }
         stage("docker build"){
@@ -27,6 +43,14 @@ pipeline{
                     docker build -t spring-boot-app .
                 '''
             }
+            post{
+                success{
+                    echo "Docker image built successfully"
+                }
+                failure{
+                    echo "Docker image build failed"
+                }
+            }
         }
          stage("Deploy"){
              steps{
@@ -34,6 +58,14 @@ pipeline{
                      java -jar /var/lib/jenkins/workspace/mvn-project/target/hello-world-0.0.1-SNAPSHOT.war
                  '''
              }
+                post{
+                    success{
+                        echo "Application deployed successfully"
+                    }
+                    failure{
+                        echo "Application deployment failed"
+                    }
+                }
          }
     }
 }
