@@ -59,8 +59,8 @@ pipeline{
         stage("docker run"){
             steps{
                 sh '''
-                    docker rm -f spring-boot-app
-                    docker run -itd -p 8090:8090 spring-boot-app /bin/bash
+                    docker rm -f spring-boot-container
+                    docker run -itd --name spring-boot-container -p 8090:8090 spring-boot-app /bin/bash
                 '''
             }
             post{
