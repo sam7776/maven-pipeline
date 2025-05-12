@@ -73,26 +73,22 @@ pipeline{
     }
     post{
         success{
-            email to: 'snnshnt@gmail.com',
-            subject: "Build Successful",
+            mail to: 'snnshnt@gmail.com',
+            subject: "Build Successful- ${JOB_NAME} #${BUILD_NUMBER}",
+            body: """
             body: "The build was successful. Check the console output at ${env.BUILD_URL}."
         }
         failure{
-            email to: 'snnshnt@gmail.com',
-            subject: "Build Failed",
+            mail to: 'snnshnt@gmail.com',
+            subject: "Build Failed - ${JOB_NAME} #${BUILD_NUMBER}",
             body: """
-            ${JOB_NAME} -${WORKSPACE},   
-            ${JOB_NAME} -${JENKINS_URL},
-            ${JOB_NAME} - ${BUILD_ID}, 
-            ${JOB_URL} - ${BUILD_NUMBER},
-            ${JOB_NAME} - ${BUILD_URL},
-            ${JOB_NAME} - ${BUILD_DISPLAY_NAME},
-            ${JOB_NAME} - ${BUILD_CAUSE},
-            ${JOB_NAME} - ${BUILD_USER_ID},
-            ${JOB_NAME} - ${BUILD_USER},
-            ${JOB_NAME} - ${BUILD_USER_EMAIL},
-            ${JOB_NAME} - ${BUILD_USER_REMOTE_USER},
-            ${JOB_NAME} - ${BUILD_USER_REMOTE_USER_EMAIL}
+            Job: ${JOB_NAME}
+            Build Number: ${BUILD_NUMBER}
+            Build URL: ${BUILD_URL}
+            Workspace: ${WORKSPACE}
+            Jenkins URL: ${JENKINS_URL}
+            Build Cause: ${BUILD_CAUSE}
+            Build User: ${BUILD_USER_ID} (${BUILD_USER})
             """
         }
     }  
