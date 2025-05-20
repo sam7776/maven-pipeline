@@ -39,7 +39,7 @@ pipeline{
         }
         stage('Test'){
             steps{
-                input message: 'Please confirm to run tests'
+                input: 'Please confirm to run tests'
                 echo "Running tests..."
                 sh "mvn test"
             }
