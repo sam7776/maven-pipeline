@@ -5,13 +5,13 @@ pipeline{
         gitUrl = "${env.GIT_URL}"
     }
     triggers{
-        pollSCM('* * * * * *')
+        pollSCM('* * * * *')
     }
     stages{
         stage('Git Checkout'){
             steps{
                 sh """
-                    echo "Starting Git Checkout...
+                    echo "Starting Git Checkout..."
                 """
             }
             post{
