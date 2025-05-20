@@ -66,7 +66,7 @@ pipeline {
         // Stage 4: Deploy
         stage('Deploy') {
             steps {
-                sh "sudo java -jar /hello-world-0.0.1-SNAPSHOT.war" // Deploy the application
+                sh "java -jar /var/lib/jenkins/workspace/maven-project-D-Pipeline/target/hello-world-0.0.1-SNAPSHOT.war" // Deploy the application
             }
             post {
                 success {
