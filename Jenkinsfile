@@ -4,7 +4,7 @@ pipeline{
         maven "mvn"
     }
     environment{
-        bno = ${env.BUILD_NUMBER}
+        bno = "${env.BUILD_NUMBER}"
         gitUrl = "${env.GIT_URL}"
     }
     triggers{
