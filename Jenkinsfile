@@ -3,6 +3,7 @@ pipeline{
     environment{
         bno = "${env.BUILD_NUMBER}"
         gitUrl = "${env.GIT_URL}"
+        project = "Current Project is working fine and well"
     }
     triggers{
         pollSCM('* * * * *')
@@ -52,7 +53,7 @@ pipeline{
     }
     post{
         always{
-            echo "Pipeline worked !!"
+            echo "${project}"
         }
         success{
             mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com',
