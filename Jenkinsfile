@@ -1,8 +1,5 @@
 pipeline{
     agent any
-    tools{
-        maven "mvn"
-    }
     environment{
         bno = "${env.BUILD_NUMBER}"
         gitUrl = "${env.GIT_URL}"
@@ -28,7 +25,7 @@ pipeline{
         }
         stage('Build'){
             steps{
-                mvn clean package
+                sh "mvn clean package"
             }
             post{
                 success{
