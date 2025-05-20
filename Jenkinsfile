@@ -50,6 +50,19 @@ pipeline{
                 }
             }
         }
+        stage('Deploy'){
+            steps{
+                sh "mvn deploy"
+            }
+            post{
+                success{
+                    echo "Deployment completed successfully for build number ${bno}"
+                }
+                failure{
+                    echo "Deployment failed for build number ${bno}"
+                }
+            }
+        }
     }
     post{
         always{
