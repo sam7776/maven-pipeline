@@ -30,13 +30,13 @@ pipeline{
             steps{
                 sh mvn clean install
             }
-        }
-        post{
-            success{
-                echo "Build completed successfully for build number ${bno}"
-            }
-            failure{
-                echo "Build failed for build number ${bno}"
+            post{
+                success{
+                    echo "Build completed successfully for build number ${bno}"
+                }
+                failure{
+                    echo "Build failed for build number ${bno}"
+                }
             }
         }
     }
