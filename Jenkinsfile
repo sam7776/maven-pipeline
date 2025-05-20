@@ -26,5 +26,18 @@ pipeline{
                 }
             }
         }
+        stage('Build'){
+            steps{
+                sh mvn clean install
+            }
+        }
+        post{
+            success{
+                echo "Build completed successfully for build number ${bno}"
+            }
+            failure{
+                echo "Build failed for build number ${bno}"
+            }
+        }
     }
 }
