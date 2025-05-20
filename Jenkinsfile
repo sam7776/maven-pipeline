@@ -17,10 +17,10 @@ pipeline{
             }
             post{
                 success{
-                    echo "Git Checkout completed successfully for build number ${bno}"
+                    echo "Git Checkout completed successfully for build number ${bno} and git URL is ${gitUrl}"
                 }
                 failure{
-                    echo "Git Checkout failed for build number ${bno}"
+                    echo "Git Checkout failed for build number ${bno} and git URL is ${gitUrl}"
                 }
             }
         }
