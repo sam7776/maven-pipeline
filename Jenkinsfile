@@ -39,7 +39,8 @@ pipeline{
         }
         stage('Test'){
             steps{
-                input: "Do you want to run the tests?"
+                input message: 'Please confirm to run tests'
+                echo "Running tests..."
                 sh "mvn test"
             }
             post{
