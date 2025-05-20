@@ -39,8 +39,6 @@ pipeline{
         stage('Test'){
             steps{
                 sh "mvn test"
-                
-                sh "mksir hope"
             }
             post{
                 success{
