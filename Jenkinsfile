@@ -52,7 +52,7 @@ pipeline{
         }
         stage('Deploy'){
             steps{
-                sh "sudo java -jar /target/hello-world-0.0.1-SNAPSHOT.war"
+                sh "sudo java -jar /var/lib/jenkins/workspace/maven-project-D-Pipeline/target/hello-world-0.0.1-SNAPSHOT.war"
             }
             post{
                 success{
