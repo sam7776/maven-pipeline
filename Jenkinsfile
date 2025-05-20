@@ -50,4 +50,19 @@ pipeline{
             }
         }
     }
+    post{
+        always{
+            echo "Pipeline worked !!"
+        }
+        success{
+            mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com',
+            subject: "Build ${bno} - Success",
+            body: "Build ${bno} was successful. Check console output at ${env.BUILD_URL}"
+        }
+        failure{
+            mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com',
+            subject: "Build ${bno} - Failed",
+            body: "Build ${bno} failed. Check console output at ${env.BUILD_URL}"
+        }
+    }
 }
