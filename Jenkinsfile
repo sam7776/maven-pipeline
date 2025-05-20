@@ -4,7 +4,8 @@ pipeline{
         maven "mvn"
     }
     environment{
-        
+        bno = ${env.BUILD_NUMBER}
+        gitUrl = "${env.GIT_URL}"
     }
     triggers{
         pollSCM('* * * * * *')
@@ -17,8 +18,11 @@ pipeline{
                 }
             }
             post{
-                always{
-                    echo "Git Checkout completed"
+                success{
+                    echo "Git Checkout completed successfully for build number ${bno}"
+                }
+                failure{
+                    echo "Git Checkout failed for build number ${bno}"
                 }
             }
         }
