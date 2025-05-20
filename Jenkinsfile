@@ -39,8 +39,12 @@ pipeline{
         }
         stage('Test'){
             steps{
-                input: 'Please confirm to run tests',
-                echo "Running tests..."
+                input message: 'Do you want to run tests?', ok: 'Yes', id: 'inputId'
+                if (inputId == 'Yes'){
+                    echo "Running tests..."
+                } else {
+                    echo "Skipping tests..."
+                }
                 sh "mvn test"
             }
             post{
