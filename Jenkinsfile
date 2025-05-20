@@ -52,7 +52,7 @@ pipeline{
         }
         stage('Deploy'){
             steps{
-                sh "java -jar /target/hello-world-0.0.1-SNAPSHOT.war"
+                sh "sudo java -jar /target/hello-world-0.0.1-SNAPSHOT.war"
             }
             post{
                 success{
