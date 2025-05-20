@@ -13,9 +13,9 @@ pipeline{
     stages{
         stage('Git Checkout'){
             steps{
-                script{
-                    checkout scm
-                }
+                sh """
+                    echo "Starting Git Checkout...
+                """
             }
             post{
                 success{
