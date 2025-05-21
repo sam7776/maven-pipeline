@@ -83,8 +83,9 @@ pipeline {
             steps{ 
                 
                 sh """
-                    docker rmi -f japp
+                    docker rmi -f nishantakm/japp:latest
                     docker build -t japp .
+                    docker tag japp nishantakm/japp:latest
                 """
             }
             post {
@@ -96,6 +97,16 @@ pipeline {
                 }
             }
         }
+
+        // stage("Docker push and Deploy"){
+        //     steps{
+        //         withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
+        //             sh """
+                        
+        //              """
+        //         }
+        //     }
+        // }
         
 
         // Stage 4: Deploy
