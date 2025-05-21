@@ -84,7 +84,6 @@ pipeline {
             steps{
                 echo "Cleaning up all data..."
                 sh """
-                    docker stop my_app
                     docker rm -f my_app
                     docker rmi -f nishantakm/japp:latest
                     docker logout
