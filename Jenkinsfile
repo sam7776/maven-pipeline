@@ -79,6 +79,24 @@ pipeline {
             }
         }
 
+        stage('Docker Build'){
+            steps{
+                sh """
+                    docker rmi -f japp
+                    docker build -t japp .
+                """
+            }
+            post {
+                success {
+                    echo "Docker build completed successfully for build number ${bno}"
+                }
+                failure {
+                    echo "Docker build failed for build number ${bno}"
+                }
+            }
+        }
+        
+
         // Stage 4: Deploy
         // stage('Deploy') {
         //     steps {
