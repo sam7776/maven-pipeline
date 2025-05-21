@@ -49,6 +49,7 @@ pipeline {
         // Stage 2: Build
         stage('Build') {
             steps {
+                echo "Building the project..."
                 sh "mvn clean package" // Build the project using Maven
             }
             post {
@@ -83,7 +84,7 @@ pipeline {
             steps{ 
                 
                 sh """
-                    docker rmi -f nishantakm/japp:latest
+                    echo "Building Docker image..."
                     docker build -t nishantakm/japp:latest .
                 """
             }
@@ -97,15 +98,20 @@ pipeline {
             }
         }
 
-        // stage("Docker push and Deploy"){
-        //     steps{
-        //         withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
-        //             sh """
-                        
-        //              """
-        //         }
-        //     }
-        // }
+        stage("Docker push and Deploy"){
+            steps{
+                input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
+                echo "Pushing Docker image to Docker Hub..."
+                withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
+                    sh """
+                        docker login -u $Duname -p $Dupass
+                        docker push nishantakm/japp:latest
+                        docker rmi -f nishantakm/japp:latest
+                        docker logout
+                    """
+                }
+            }
+        }
         
 
         // Stage 4: Deploy
