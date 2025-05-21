@@ -80,7 +80,7 @@ pipeline {
             }
         }
 
-        satge("Clean Up all Docker Data"){
+        stage("Clean Up all Docker Data"){
             steps{
                 echo "Cleaning up all data..."
                 sh """
