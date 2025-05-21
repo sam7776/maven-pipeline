@@ -119,7 +119,7 @@ pipeline {
 
         stage("Docker push and Deploy"){
             steps{
-                input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
+                // input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
                 echo "Pushing Docker image to Docker Hub..."
                 withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
                     sh """
@@ -143,6 +143,9 @@ pipeline {
                 sh """
                     echo "Running Docker container..."
                     docker run -itd --name my_app nishantakm/japp:latest /bin/bash
+
+                    docker rm -f my_app
+                    docker rmi -f nishantakm/japp:latest
                 """
             }
             post {
