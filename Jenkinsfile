@@ -83,7 +83,6 @@ pipeline {
             steps{ 
                 // docker rmi -f japp
                 sh """
-                    
                     docker build -t japp .
                 """
             }
