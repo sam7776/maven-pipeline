@@ -103,7 +103,7 @@ pipeline {
         success {
             // Send email notification on successful build
             mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com',
-            subject: "Build ${bno} - Success",
+            subject: "Build ${bno} -  Success",
             body: "Build ${bno} was successful. Check console output at ${env.BUILD_URL}"
         }
         failure {
