@@ -86,6 +86,14 @@ pipeline {
                 echo "Git URL: ${gitUrl}"   // Display the Git URL
                 echo "Project description: ${project}" // Display the project description
             }
+            post {
+                success {
+                    echo "Environment variables displayed successfully for build number ${bno}"
+                }
+                failure {
+                    echo "Failed to display environment variables for build number ${bno}"
+                }
+            }
         }
     }
 
