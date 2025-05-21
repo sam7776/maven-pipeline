@@ -6,7 +6,8 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
-        unpass = "${env.IdPass}"
+        username = credentials('uname') // Git username credential ID
+        password = credentials('upass') // Git password credential ID
     }
 
     // Trigger to poll the SCM for changes every minute
@@ -29,6 +30,18 @@ pipeline {
                 failure {
                     echo "Git Checkout failed for build number ${bno} and git URL is ${gitUrl}"
                 }
+            }
+        }
+
+        stage("Env Variables") {
+            steps {
+                sh '''
+                    echo "Build number: ${bno}"
+                    echo "Git URL: ${gitUrl}"
+                    echo "Project description: ${project}"
+                    echo "Git username: ${username}" // Display the Git username
+                    echo "Git password: ${password}" // Display the Git password
+                '''
             }
         }
 
