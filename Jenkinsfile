@@ -6,7 +6,7 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
-        
+
         // username = credentials('uname') // Git username credential ID
         // password = credentials('upass') // Git password credential ID
     }
@@ -64,7 +64,7 @@ pipeline {
         // Stage 3: Test
         stage('Test') {
             steps {
-                echo "here is username and  password ${unpass}" // Display the username and password
+                // echo "here is username and  password ${unpass}" // Display the username and password
                 // input message: 'Do you want to run tests?' // Prompt user for confirmation to run tests
                 echo "Running tests..."
                 sh "mvn test" // Run tests using Maven
