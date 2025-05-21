@@ -82,7 +82,7 @@ pipeline {
         stage('Docker Build'){
             steps{
                 sh """
-                    docker rmi -f japp
+                    // docker rmi -f japp
                     docker build -t japp .
                 """
             }
