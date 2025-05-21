@@ -50,7 +50,6 @@ pipeline {
         // Stage 3: Test
         stage('Test') {
             steps {
-                echo "here is username and  password ${unpass}" // Display the username and password
                 // input message: 'Do you want to run tests?' // Prompt user for confirmation to run tests
                 echo "Running tests..."
                 sh "mvn test" // Run tests using Maven
@@ -80,6 +79,14 @@ pipeline {
         //     }
         // }
 
+        stage('Env Variables') {
+            steps {
+                echo "here is username and  password ${unpass}" // Display the username and password
+                echo "Build number: ${bno}" // Display the build number
+                echo "Git URL: ${gitUrl}"   // Display the Git URL
+                echo "Project description: ${project}" // Display the project description
+            }
+        }
     }
 
     // Post actions to be executed after the pipeline completes
