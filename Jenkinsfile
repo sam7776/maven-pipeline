@@ -143,9 +143,6 @@ pipeline {
                 sh """
                     echo "Running Docker container..."
                     docker run -itd --name my_app nishantakm/japp:latest /bin/bash
-
-                    docker rm -f my_app
-                    docker rmi -f nishantakm/japp:latest
                 """
             }
             post {
