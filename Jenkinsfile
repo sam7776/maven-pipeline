@@ -55,7 +55,7 @@ pipeline {
             }
             post {
                 success {
-                    echo "Tests completed successfully for build number ${bno}"
+                    echo "Tests completed successfully  for build number ${bno}"
                 }
                 failure {
                     echo "Tests failed for build number ${bno}"
