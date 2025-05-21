@@ -6,7 +6,7 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
-        unpass = "${env.IdPass}"
+        unpass = credentials('IdPaas')
     }
 
     // Trigger to poll the SCM for changes every minute
