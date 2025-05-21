@@ -6,6 +6,7 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
+        unpass = "${env.IdPass}"
     }
 
     // Trigger to poll the SCM for changes every minute
@@ -49,7 +50,8 @@ pipeline {
         // Stage 3: Test
         stage('Test') {
             steps {
-                input message: 'Do you want to run tests?' // Prompt user for confirmation to run tests
+                echo "here is username and password ${IdPass}" // Display the username and password
+                // input message: 'Do you want to run tests?' // Prompt user for confirmation to run tests
                 echo "Running tests..."
                 sh "mvn test" // Run tests using Maven
             }
@@ -64,19 +66,20 @@ pipeline {
         }
 
         // Stage 4: Deploy
-        stage('Deploy') {
-            steps {
-                sh "java -jar /var/lib/jenkins/workspace/maven-project-D-Pipeline/target/hello-world-0.0.1-SNAPSHOT.war" // Deploy the application
-            }
-            post {
-                success {
-                    echo "Deployment completed successfully for build number ${bno}"
-                }
-                failure {
-                    echo "Deployment failed for build number ${bno}"
-                }
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         sh "java -jar /var/lib/jenkins/workspace/maven-project-D-Pipeline/target/hello-world-0.0.1-SNAPSHOT.war" // Deploy the application
+        //     }
+        //     post {
+        //         success {
+        //             echo "Deployment completed successfully for build number ${bno}"
+        //         }
+        //         failure {
+        //             echo "Deployment failed for build number ${bno}"
+        //         }
+        //     }
+        // }
+
     }
 
     // Post actions to be executed after the pipeline completes
