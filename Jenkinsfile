@@ -6,8 +6,9 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
-        username = credentials('uname') // Git username credential ID
-        password = credentials('upass') // Git password credential ID
+        
+        // username = credentials('uname') // Git username credential ID
+        // password = credentials('upass') // Git password credential ID
     }
 
     // Trigger to poll the SCM for changes every minute
@@ -33,17 +34,17 @@ pipeline {
             }
         }
 
-        stage("Env Variables") {
-            steps {
-                sh '''
-                    echo "Build number: ${bno}"
-                    echo "Git URL: ${gitUrl}"
-                    echo "Project description: ${project}"
-                    echo "Git username: ${username}" // Display the Git username
-                    echo "Git password: ${password}" // Display the Git password
-                '''
-            }
-        }
+        // stage("Env Variables") {
+        //     steps {
+        //         sh '''
+        //             echo "Build number: ${bno}"
+        //             echo "Git URL: ${gitUrl}"
+        //             echo "Project description: ${project}"
+        //             // echo "Git username: ${uname}" // Display the Git username
+        //             // echo "Git password: ${upass}" // Display the Git password
+        //         '''
+        //     }
+        // }
 
         // Stage 2: Build
         stage('Build') {
