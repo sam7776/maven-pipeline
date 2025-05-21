@@ -86,6 +86,7 @@ pipeline {
                     docker rmi -f nishantakm/japp:latest
                     docker build -t japp .
                     docker tag japp nishantakm/japp:latest
+                    docker rmi -f japp
                 """
             }
             post {
