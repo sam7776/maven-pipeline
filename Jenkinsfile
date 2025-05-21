@@ -100,7 +100,7 @@ pipeline {
 
         stage("Docker push and Deploy"){
             steps{
-                // input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
+                input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
                 echo "Pushing Docker image to Docker Hub..."
                 withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
                     sh """
@@ -109,6 +109,14 @@ pipeline {
                         docker rmi -f nishantakm/japp:latest
                         docker logout
                     """
+                }
+            }
+            post {
+                success {
+                    echo "Docker image pushed successfully for build number ${bno}"
+                }
+                failure {
+                    echo "Docker push failed for build number ${bno}"
                 }
             }
         }
