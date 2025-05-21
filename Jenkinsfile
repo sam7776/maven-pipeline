@@ -65,7 +65,7 @@ pipeline {
         // Stage 3: Test
         stage('Test') {
             steps {
-                // echo "here is username and  password ${unpass}" // Display the username and password
+                // echo "here is username ${username} and  password ${password}" // Display the username and password
                 // input message: 'Do you want to run tests?' // Prompt user for confirmation to run tests
                 echo "Running tests..."
                 sh "mvn test" // Run tests using Maven
@@ -76,6 +76,26 @@ pipeline {
                 }
                 failure {
                     echo "Tests failed for build number ${bno}"
+                }
+            }
+        }
+
+        satge("Clean Up all Docker Data"){
+            steps{
+                echo "Cleaning up all data..."
+                sh """
+                    docker stop my_app
+                    docker rm -f my_app
+                    docker rmi -f nishantakm/japp:latest
+                    docker logout
+                """
+            }
+            post {
+                success {
+                    echo "Clean up completed successfully for build number ${bno}"
+                }
+                failure {
+                    echo "Clean up failed for build number ${bno}"
                 }
             }
         }
@@ -106,8 +126,6 @@ pipeline {
                     sh """
                         docker login -u ${Duname} -p ${Dupass}
                         docker push nishantakm/japp:latest
-                        docker rmi -f nishantakm/japp:latest
-                        docker logout
                     """
                 }
             }
@@ -117,6 +135,23 @@ pipeline {
                 }
                 failure {
                     echo "Docker push failed for build number ${bno}"
+                }
+            }
+        }
+
+        stage('Deploy / Docker Run'){
+            steps{
+                sh """
+                    echo "Running Docker container..."
+                    docker run -itd --name my_app nishantakm/japp:latest /bin/bash
+                """
+            }
+            post {
+                success {
+                    echo "Docker container started successfully for build number ${bno}"
+                }
+                failure {
+                    echo "Docker container start failed for build number ${bno}"
                 }
             }
         }
