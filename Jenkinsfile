@@ -83,24 +83,24 @@ pipeline {
             }
         }
 
-        // stage("Clean Up all Docker Data"){
-        //     steps{
-        //         echo "Cleaning up all data..."
-        //         sh """
-        //             docker rm -f my_app
-        //             docker rmi -f nishantakm/japp:latest
-        //             docker logout
-        //         """
-        //     }
-        //     post {
-        //         success {
-        //             echo "Clean up completed successfully for build number ${bno}"
-        //         }
-        //         failure {
-        //             echo "Clean up failed for build number ${bno}"
-        //         }
-        //     }
-        // }
+        stage("Clean Up all Docker Data"){
+            steps{
+                echo "Cleaning up all data..."
+                sh """
+                    docker rm -f my_app
+                    docker rmi -f nishantakm/japp:latest
+                    docker logout
+                """
+            }
+            post {
+                success {
+                    echo "Clean up completed successfully for build number ${bno}"
+                }
+                failure {
+                    echo "Clean up failed for build number ${bno}"
+                }
+            }
+        }
 
         stage('Docker Build'){
             steps{ 
