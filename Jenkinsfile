@@ -2,6 +2,10 @@ pipeline {
     agent any
 
     // Environment variables to store build-specific and project-specific information
+    tools{
+        maven 'mvn'
+        docker 'docker'
+    }
     environment {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
