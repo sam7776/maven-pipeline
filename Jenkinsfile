@@ -112,7 +112,7 @@ pipeline {
             }
             post {
                 success {
-                    echo "Docker build completed successfully for build number ${bno}"
+                    echo "Docker build completed  successfully for build number ${bno}"
                 }
                 failure {
                     echo "Docker build failed for build number ${bno}"
