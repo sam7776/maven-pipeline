@@ -6,6 +6,7 @@ pipeline {
         maven 'mvn'
     }
     environment {
+        SONARQUBE_SERVER = 'sonar-scan'
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
@@ -48,6 +49,30 @@ pipeline {
         //         '''
         //     }
         // }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv("${SONARQUBE_SERVER}") { // Use SonarQube environment
+                    echo "Starting SonarQube analysis..."
+                    // Run SonarQube analysis using Maven
+                    // Ensure you have the SonarQube plugin installed in Jenkins
+                    // and the SonarQube server configured in Jenkins global settings.
+                    // Replace 'my-project' and 'my-token' with your actual SonarQube project key and token
+                    // Ensure that the SonarQube server is reachable from the Jenkins agent
+                    // and that the SonarQube plugin is properly configured.
+                    echo "Running SonarQube analysis for project ${project}..."
+                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=maven-pipeline -Dsonar.login=sonar-token'
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
         // Stage 2: Build
         stage('Build') {
