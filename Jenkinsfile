@@ -124,8 +124,8 @@ pipeline {
             steps{
                 // input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
                 echo "Pushing Docker image to Docker Hub..."
-                // withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')])
-                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'Dupass', usernameVariable: 'Duname')]) {
+                withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
+                // withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'Dupass', usernameVariable: 'Duname')]) {
                     sh """
                         docker login -u ${Duname} -p ${Dupass}
                         docker push nishantakm/japp:latest
