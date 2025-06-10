@@ -141,7 +141,7 @@ pipeline {
         stage('Deploy / Docker Run'){
             steps{
                 sh """
-                    echo "Running Docker container..."
+                    echo "Running Docker  container..."
                     docker run -itd --name my_app nishantakm/japp:latest /bin/bash
                 """
             }
