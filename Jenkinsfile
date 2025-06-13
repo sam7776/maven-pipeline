@@ -4,7 +4,7 @@ pipeline {
     // Environment variables to store build-specific and project-specific information
     tools{
         maven 'mvn'
-        scannerhome 'sonar-scanner'
+        sonarQubeScanner 'sonarqube-scanner'
     }
     environment { 
         bno = "${env.BUILD_NUMBER}" // Build number
@@ -55,13 +55,12 @@ pipeline {
         stage('sonarQube Analysis') {
             steps {
                 echo "Starting SonarQube analysis..."
-                withCredentials([string(credentialsId: 'sonar-pass', variable: 'name'), string(credentialsId: 'sonar-token', variable: 'pass')]) {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
                     sh """
                         mvn sonar:sonar \
                         -Dsonar.projectKey=mvn-project \
                         -Dsonar.host.url=http://192.168.1.11:9000 \
-                        -Dsonar.login=${Sname} \
-                        -Dsonar.password=${Spass}
+                        -Dsonar.login=${sonar-token} 
                     """
                 }
             }
