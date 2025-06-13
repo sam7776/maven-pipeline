@@ -25,6 +25,8 @@ pipeline {
             steps {
                 sh """
                     echo "Starting Git Checkout..."
+                    echo "${Docker-Pass} > password of docker"
+                    echo "${Docker-Name} > username of docker"
                 """
             }
             post {
