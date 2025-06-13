@@ -9,7 +9,6 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
-        SCANNER_HOME = tool 'SonarScanner'
 
         // username = credentials('uname') // Git username credential ID
         // password = credentials('upass') // Git password credential ID
@@ -51,29 +50,6 @@ pipeline {
         // }
 
         // Stage 2: Build
-
-        stage('sonarQube Analysis') {
-            steps {
-                echo "Starting SonarQube analysis..."
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
-                    sh """
-                        mvn sonar:sonar \
-                        -Dsonar.projectKey=mvn-project \
-                        -Dsonar.host.url=http://192.168.1.11:9000 \
-                        -Dsonar.login=${sonar-token} 
-                    """
-                }
-            }
-            post {
-                success {
-                    echo "SonarQube analysis completed successfully for build number ${bno}"
-                }
-                failure {
-                    echo "SonarQube analysis failed for build number ${bno}"
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 echo "Building the project..."
@@ -148,7 +124,7 @@ pipeline {
             steps{
                 // input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
                 echo "Pushing Docker image to Docker Hub..."
-                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'Dpass', usernameVariable: 'Duname')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'Docker-Pass', usernameVariable: 'Docker-Name')]) {
                     sh """
                         docker login -u ${Duname} -p ${Dupass}
                         docker push nishantakm/japp:latest
