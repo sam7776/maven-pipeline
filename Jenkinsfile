@@ -137,7 +137,7 @@ pipeline {
                     echo "Docker image pushed successfully for build number ${bno}"
                 }
                 failure {
-                    echo "Docker push failed for build number ${bno}"
+                    echo "Docker push failed  for build number ${bno}"
                 }
             }
         }
