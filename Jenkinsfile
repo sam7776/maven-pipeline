@@ -9,6 +9,7 @@ pipeline {
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
+        SCANNER_HOME = tool 'SonarScanner'
 
         // username = credentials('uname') // Git username credential ID
         // password = credentials('upass') // Git password credential ID
