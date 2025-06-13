@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY /target/*.war /app
 
-CMD [ "java", "-jar", "/app/*.war" ]
+CMD [ "java", "-jar", "*.war" ]

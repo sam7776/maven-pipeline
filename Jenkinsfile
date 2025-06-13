@@ -2,7 +2,10 @@ pipeline {
     agent any
 
     // Environment variables to store build-specific and project-specific information
-    environment {
+    tools{
+        maven 'mvn'
+    }
+    environment { 
         bno = "${env.BUILD_NUMBER}" // Build number
         gitUrl = "${env.GIT_URL}"   // Git repository URL
         project = "Current Project is working fine and well" // Project description
@@ -80,24 +83,24 @@ pipeline {
             }
         }
 
-        stage("Clean Up all Docker Data"){
-            steps{
-                echo "Cleaning up all data..."
-                sh """
-                    docker rm -f my_app
-                    docker rmi -f nishantakm/japp:latest
-                    docker logout
-                """
-            }
-            post {
-                success {
-                    echo "Clean up completed successfully for build number ${bno}"
-                }
-                failure {
-                    echo "Clean up failed for build number ${bno}"
-                }
-            }
-        }
+        // stage("Clean Up  all Docker Data"){
+        //     steps{
+        //         echo "Cleaning up all data..."
+        //         sh """
+        //             docker rm -f my_app
+        //             docker rmi -f nishantakm/japp:latest
+        //             docker logout
+        //         """
+        //     }
+        //     post {
+        //         success {
+        //             echo "Clean up completed successfully for build number ${bno}"
+        //         }
+        //         failure {
+        //             echo "Clean up failed for build number ${bno}"
+        //         }
+        //     }
+        // }
 
         stage('Docker Build'){
             steps{ 
@@ -122,6 +125,7 @@ pipeline {
                 // input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
                 echo "Pushing Docker image to Docker Hub..."
                 withCredentials([string(credentialsId: 'uname', variable: 'Duname'), string(credentialsId: 'upass', variable: 'Dupass')]) {
+                // withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'Dupass', usernameVariable: 'Duname')]) {
                     sh """
                         docker login -u ${Duname} -p ${Dupass}
                         docker push nishantakm/japp:latest
@@ -180,13 +184,13 @@ pipeline {
         }
         success {
             // Send email notification on successful build
-            mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com',
+            mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com,ajeshmurmale1996@gmail.com',
             subject: "Build ${bno} -  Success",
             body: "Build ${bno} was successful. Check console output at ${env.BUILD_URL}"
         }
         failure {
             // Send email notification on failed build
-            mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com',
+            mail to: 'snnshnt@gmail.com,niishantakm@gmail.com,akmeshram1971@gmail.com,ajeshmurmale1996@gmail.com',
             subject: "Build ${bno} - Failed",
             body: "Build ${bno} failed. Check console output at ${env.BUILD_URL}"
         }
