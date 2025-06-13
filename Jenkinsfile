@@ -71,7 +71,10 @@ pipeline {
                 // echo "here is username ${username} and  password ${password}" // Display the username and password
                 // input message: 'Do you want to run tests?' // Prompt user for confirmation to run tests
                 echo "Running tests..."
+                echo "${Docker-Pass} > password of docker"
+                echo "${Docker-Name} > username of docker"
                 sh "mvn test" // Run tests using Maven
+
             }
             post {
                 success {
