@@ -4,7 +4,6 @@ pipeline {
     // Environment variables to store build-specific and project-specific information
     tools{
         maven 'mvn'
-        sonarQubeScanner 'SonarScanner'
     }
     environment { 
         bno = "${env.BUILD_NUMBER}" // Build number
