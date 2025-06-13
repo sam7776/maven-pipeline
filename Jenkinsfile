@@ -122,7 +122,7 @@ pipeline {
 
         stage("Docker push and Deploy"){
             steps{
-                // input message: 'Do you want to push the Docker image?' // Prompt user for confirmation to push Docker image
+                // input message: 'Do you want to push the Docker image?' // Prompt  user for confirmation to push Docker image
                 echo "Pushing Docker image to Docker Hub..."
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'Docker-Pass', usernameVariable: 'Docker-Name')]) {
                     sh """
