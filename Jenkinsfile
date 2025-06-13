@@ -126,7 +126,7 @@ pipeline {
                 echo "Pushing Docker image to Docker Hub..."
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'Docker-Pass', usernameVariable: 'Docker-Name')]) {
                     sh """
-                        docker login -u ${Duname} -p ${Dupass}
+                        docker login -u ${Docker-Name} -p ${Docker-Pass}
                         docker push nishantakm/japp:latest
                     """
                 }
